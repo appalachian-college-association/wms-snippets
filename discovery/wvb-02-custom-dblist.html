@@ -1,0 +1,206 @@
+<!-- Bethany College WorldCat Discovery search box (Multi-widget safe class structure with OCLC styling) -->
+<!-- 5-tab no icons -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous">
+
+<style type="text/css">
+  /* OCLC CSS rules but adapted for class-based selectors for multi-widget support */
+  .worldcat-search-box, .worldcat-search-box * {
+    box-sizing: border-box !important;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  
+  .worldcat-search-box .material-tab {
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+    background-color: #005643;
+    color: #fff;
+    min-height: 2em;
+    min-width: 1.5rem;
+    padding: .5em;
+    box-sizing: border-box;
+    border-radius: .25em .25em 0 0;
+    margin-right: .4em;
+    z-index: 2;
+  }
+  
+  .worldcat-search-form {
+    position: relative;
+    width: auto;
+    padding: 1.25em 2em 2em;
+    background-color: #f2f2f2 !important;
+    color: #333 !important;
+    z-index: 1;
+    line-height: initial;
+  }
+  
+  .worldcat-search-box .material-tab.active-tab {
+    background-color: #f2f2f2 !important;
+    color: #333 !important;
+  }
+  
+  .worldcat-index-container {
+    position: relative;
+    height: 3em;
+    background-color: white;
+    color: black;
+  }
+  
+  .worldcat-index-container:after {
+    content: '\f078';
+    display: block;
+    font-family: 'FontAwesome', sans-serif;
+    position: absolute;
+    top: 0;
+    right: .5em;
+    line-height: 3em;
+    z-index: 5;
+  }
+  
+  .worldcat-index-container .worldcat-search-select {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    min-width: initial;
+    font-size: 1em;
+    padding: 0 2em 0 1em;
+    background-color: transparent;
+    border-top: 1px solid #ccc;
+    border-right: 0;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-image: initial;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  select::-ms-expand {
+    display: none;
+  }
+</style>
+
+<div class="worldcat-search-box" style="margin: 1em 0px 2em;">
+  <!-- Tabs (preserved from generator output) -->
+  <div style="display:flex; font-size:1.1em; box-sizing:border-box; text-align:center;">
+    <span class="material-tab active-tab" data-facets='[{"key":"format","value":"all"}]' tabindex="0" role="tab" aria-selected="true">Search Everything</span>
+    <span class="material-tab" data-facets='[{"key":"subformat","value":"Book::book_printbook"},{"key":"subformat","value":"Book::book_largeprint"},{"key":"subformat","value":"Book::book_thsis"}]' tabindex="0" role="tab" aria-selected="false">Print Books</span>
+    <span class="material-tab" data-facets='[{"key":"subformat","value":"Book::book_digital"}]' tabindex="0" role="tab" aria-selected="false">eBooks</span>
+    <span class="material-tab" data-facets='[{"key":"format","value":"Video"}]' tabindex="0" role="tab" aria-selected="false">Movies</span>
+    <span class="material-tab" data-facets='[{"key":"subformat","value":"Artchap::artchap_artcl"},{"key":"format","value":"Jrnl"}]' tabindex="0" role="tab" aria-selected="false">Articles</span>
+  </div>
+
+  <form class="worldcat-search-form" action="" onsubmit="return worldcatSearchGo(this);" method="post" aria-label="WorldCat Discovery search">
+
+    <!-- Bethany config (from Service Configuration) -->
+    <input type="hidden" name="baseUrl" value="https://bethanycollegewv.on.worldcat.org/search">
+    <input type="hidden" name="scope" value="wz:841">
+    <!-- Database list from the generator output -->
+    <input type="hidden" name="databaseList" value="638,1708,1293,1271,1275,3451,2229,3714,4156,4158,1609,1059,2237,2259,2260,2261,2268,2262,2263,2264,2267,2281,2328,3201,3284,3684,3978,1719,2482,10024,1075,1725,11200,1728,1672,1082,1855,3313,2897">
+    <!-- Generator flags preserved -->
+    <input type="hidden" name="queryParams" value="clusterResults=off&groupVariantRecords=off&stickyFacetsChecked=on&sortKey=BEST_MATCH">
+																			  
+															
+
+    <label for="worldcat-query" style="display:inline-block; font-size:1.3em; font-weight:normal; margin:.5em 0;">
+      Search Bethany College Library Resources
+    </label>
+
+    <div style="display:flex; width:100%;">
+      <div style="display:flex; flex-grow:1;">
+        <div class="worldcat-index-container">
+          <select class="worldcat-search-select" name="searchField" aria-label="Search field">
+            <option value="kw" selected>Keyword</option>
+            <option value="au">Author</option>
+            <option value="su">Subject</option>
+            <option value="ti">Title</option>
+          </select>
+        </div>
+        <input type="text" id="worldcat-query" name="queryString"
+               required autocomplete="off"
+               style="display:inline-block; width:100%; height:3em; font-size:1em; padding:0 .5em; margin-bottom:.5em; color:#000; background-color:#fff; border:1px solid #ccc; box-shadow:none;">
+      </div>
+      <div>
+        <input type="submit" value="Search"
+               style="padding:.75em 1.5em; font-size:1em; width:auto; height:3em; min-width:8em; color:#fff; background-color:#005643; margin:0 0 0 .5em; border-radius:.25em; border:none; background-image:none; float:none; text-align:center;">
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between;">
+      <p style="flex-basis:100%; font-size:.9em; text-align:right;">
+        <a class="worldcat-advanced-search" href="https://bethanycollegewv.on.worldcat.org/advancedsearch" target="_blank" rel="noopener"
+           style="text-decoration:underline; color:#333;">Advanced Search</a>
+      </p>
+    </div>
+  </form>
+</div>
+
+<script>
+  function worldcatSearchGo(form) {
+    var baseUrl     = form.baseUrl.value;            // e.g., https://bethanycollegewv.on.worldcat.org/search
+    var databaseList= form.databaseList.value;       // comma-separated database IDs
+    var queryParams = form.queryParams.value;        // e.g., clusterResults=off&...
+    var scope       = form.scope.value;              // e.g., wz:841
+    var searchField = form.searchField.value;        // kw|au|su|ti
+    var queryString = form.queryString.value || '';
+
+    // Get the active tab and its facets
+    var widget = form.closest('.worldcat-search-box');
+    var activeTab = widget.querySelector('.material-tab.active-tab');
+    var facets = activeTab ? JSON.parse(activeTab.getAttribute('data-facets') || '[]') : [];
+
+    // Build the query string (prefix with field type if not keyword)
+    var q = (searchField !== 'kw') ? (searchField + ':' + queryString) : queryString;
+
+    // Build the base URL with all parameters
+    var url = baseUrl + '?'
+      + 'queryString=' + encodeURIComponent(q)
+      + '&databaseList=' + encodeURIComponent(databaseList)
+      + '&' + queryParams
+      + '&baseScope=' + encodeURIComponent(scope)
+      + '&scope=' + encodeURIComponent(scope)
+      + '&idDetect=true';
+
+    // Add facet parameters to the URL
+    facets.forEach(function (facet) {
+      if (facet.key && facet.value && facet.value !== 'all') {
+        url += '&' + encodeURIComponent(facet.key) + '=' + encodeURIComponent(facet.value);
+      }
+    });
+
+    // Force OCLC sign-in with postAuth parameter
+    var signinUrl = 'https://bethanycollegewv.on.worldcat.org/signin?postAuth=' + encodeURIComponent(url);
+    window.open(signinUrl, "_blank", "noopener");    
+	 
+
+    // Clear the form
+    form.queryString.value = '';
+    return false;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.worldcat-search-box').forEach(function (box) {
+      var tabs = box.querySelectorAll('.material-tab');
+      tabs.forEach(function (tab) {
+        function activate() {
+          tabs.forEach(function (t) {
+            t.classList.remove('active-tab');
+            t.setAttribute('aria-selected','false');
+          });
+          tab.classList.add('active-tab');
+          tab.setAttribute('aria-selected','true');
+        }
+        tab.addEventListener('click', activate);
+        tab.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.keyCode === 13) activate();
+        });
+      });
+    });
+  });
+</script>
